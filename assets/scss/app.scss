@@ -1,0 +1,29 @@
+/*main-image home*/
+
+#main-image .wrapper                                                                                     
+{
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+#main-image                                                                                              
+{
+  background: url('../main.png');
+}
+
+#main-image h2                                                                                           
+{
+  color: #DC143C;  
+  font-weight: normal;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 150px 0 20px 0;
+  margin-bottom: 0 auto;
+}
+
+#main-image h2 strong                                                                                    
+{
+  font-size: 70px;
+  text-align: right;
+}

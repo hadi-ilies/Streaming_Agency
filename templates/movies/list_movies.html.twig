@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} List movies {% endblock %}
+
+{% block body %}
+    <section class="movies">
+        {% for movie in movies %}
+        <article>
+            <h2> {{ movie.Title }}: </h2>
+            <div class="content">
+                <img src={{ movie.Image }} width="250" height="350">
+                <div class="metadata">{{movie.CreatedAt | date ('d/m/y')}}</div>
+                <h3>Synopsis : </h3>        
+                 {{movie.synopsis | raw}}
+                 <a href="{{ path('movie', {'id': movie.id}) }}" class="btn btn-primary">watch now !</a>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} movie {% endblock %}
+
+{% block body %}
+    <section id="description">
+        <article>
+            <h2> {{ movie.Title }}: </h2>
+            <div class="content">
+                <img src={{ movie.Image }} width="250" height="350">
+                <div class="metadata">Created at : {{movie.CreatedAt | date ('d/m/y')}}</div>
+                <h3> Synopsis : </h3>        
+                {{ movie.synopsis | raw }}                                  
+            </div>
+        </article>
+    </section>        
+    <section id="video">
+       <iframe src={{ movie.Video }} allowfullscreen="allowfullscreen" width="800" height="500" frameborder="0"></iframe>
+    </section>
+    <section>    
+        {% if not app.user %}
+            <section id="please_connect">
+                <h2 class="no_comment">You must be connected if you want to write a comment!</h2>
+                <a href="{{ path('login') }}" class="btn btn-primary">Connect !</a>
+            </section>    
+        {% else %}
+            {{ form_start(commentForm) }}
+            {{ form_row(commentForm.author, {'attr': {'placeholder': "your name"}})}}
+            {{ form_row(commentForm.content, {'attr': {'placeholder': "write a comment"}})}}
+            <button type="submit" class="btn btn-success">Push</button>      
+            {{ form_end(commentForm) }}
+        {% endif %}    
+    </section>
+    <section id="comment">
+    <h1> {{ movie.comments | length }} Comments : </h1>    
+    {% for comment in movie.comments %}
+        <div class="comment_option">
+                <div class="row">
+                        <div class="col-3">
+                            {{ comment.author }} <small> {{ comment.createdAt | date ('d/m/y at H:i')}} </small>
+                        </div>
+                        <div class="col">
+                            {{ comment.content | raw }}
+                        </div>
+                </div>
+        </div>
+    {% endfor %}          
+{% endblock %}
+

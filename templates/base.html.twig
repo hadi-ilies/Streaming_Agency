@@ -3,7 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('build/css/app.css')}}">
+        {% endblock %}
          <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.css">
     </head>
     <body>
@@ -20,12 +22,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('movies') }}">Movies</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('registration') }}">Sign Up</a>
-                    </li>
+                    {% if not app.user %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('registration') }}">Sign Up</a>
+                        </li>
+                    {% else %}
+                         <li class="nav-item">
+                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                        </li>
+                    {% endif %}    
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" placeholder="Search" type="text">
