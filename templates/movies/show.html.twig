@@ -3,20 +3,22 @@
 {% block title %} movie {% endblock %}
 
 {% block body %}
-    <section id="description">
+    <section id="description">    
         <article>
             <h2> {{ movie.Title }}: </h2>
             <div class="content">
                 <img src={{ movie.Image }} width="250" height="350">
-                <div class="metadata">Created at : {{movie.CreatedAt | date ('d/m/y')}}</div>
+                <div class="metadata">Created at : {{ movie.CreatedAt | date ('d/m/y') }}</div>
                 <h3> Synopsis : </h3>        
                 {{ movie.synopsis | raw }}                                  
             </div>
         </article>
-    </section>        
+    </section>
+    <hr></hr>        
     <section id="video">
        <iframe src={{ movie.Video }} allowfullscreen="allowfullscreen" width="800" height="500" frameborder="0"></iframe>
     </section>
+    <hr></hr>
     <section>    
         {% if not app.user %}
             <section id="please_connect">
@@ -29,6 +31,7 @@
             {{ form_row(commentForm.content, {'attr': {'placeholder': "write a comment"}})}}
             <button type="submit" class="btn btn-success">Push</button>      
             {{ form_end(commentForm) }}
+            <hr></hr>
         {% endif %}    
     </section>
     <section id="comment">

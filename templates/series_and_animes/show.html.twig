@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} {{ animes_series.title }} {% endblock %}
+
+{% block body %}
+    <section id="description">
+        <article>
+            <h2> {{ animes_series.Title }}: </h2>
+            <div class="content">
+                <img src={{ animes_series.Image }} width="250" height="350">
+                <div class="metadata">Created at : {{animes_series.CreatedAt | date ('d/m/y')}}</div>
+                <h3> Synopsis : </h3>        
+                {{ animes_series.synopsis | raw }}                                  
+            </div>
+        </article>
+    </section> 
+    <section id="saison">
+        <h2>{{ animes_series.Saisons.nb_saison }}</h2> 
+    </section>       
+   {% endblock %}
+
