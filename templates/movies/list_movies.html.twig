@@ -6,7 +6,7 @@
     <section class="movies">
         {% for movie in movies %}
         <article id="article">
-            <h2> {{ movie.Title }}: </h2>
+            <h2> {{ movie.Title }} : </h2>
             <div class="content">
                 <img src={{ movie.Image }} width="250" height="350">
                 <div class="metadata">Created At : {{movie.CreatedAt | date ('d/m/y')}}</div>

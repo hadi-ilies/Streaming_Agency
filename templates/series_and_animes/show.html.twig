@@ -3,9 +3,9 @@
 {% block title %} {{ animes_series.title }} {% endblock %}
 
 {% block body %}
-    <section id="description">
+    <section id="description_series">
         <article>
-            <h2> {{ animes_series.Title }}: </h2>
+            <h2> {{ animes_series.Title }} : </h2>
             <div class="content">
                 <img src={{ animes_series.Image }} width="250" height="350">
                 <div class="metadata">Created at : {{animes_series.CreatedAt | date ('d/m/y')}}</div>

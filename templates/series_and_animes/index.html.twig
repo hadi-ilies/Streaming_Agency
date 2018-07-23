@@ -3,10 +3,10 @@
 {% block title %} Streaming Agency {% endblock %}
 
 {% block body %}
-<section class="series/animes">
+<section id="series_animes">
         {% for anime_serie in animes_series %}
         <article>
-            <h2> {{ anime_serie.Title }}: </h2>
+            <h2> {{ anime_serie.Title }} : </h2>
             <div class="content">
                 <img src={{ anime_serie.Image }} width="250" height="350">
                 <div class="metadata">Date : {{anime_serie.CreatedAt | date ('d/m/y')}}</div>
@@ -14,6 +14,7 @@
                  {{anime_serie.synopsis | raw}}
                  <a href="{{ path('anime_serie', {'id': anime_serie.id}) }}" class="btn btn-primary">watch now !</a>
             </div>
+            <hr></hr>
         </article>
         {% endfor %}
     </section>
