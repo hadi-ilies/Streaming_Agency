@@ -11,7 +11,7 @@
                 <img src={{ movie.Image }} width="250" height="350">
                 <div class="metadata">Created At : {{movie.CreatedAt | date ('d/m/y')}}</div>
                 <h3>Synopsis : </h3>        
-                 {{movie.synopsis | raw}}
+                 <p> {{movie.synopsis | raw}} </p>
                  <a href="{{ path('movie', {'id': movie.id}) }}" class="btn btn-primary">watch now !</a>
             </div>
             <hr></hr>

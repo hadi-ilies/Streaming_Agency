@@ -10,7 +10,7 @@
                 <img src={{ movie.Image }} width="250" height="350">
                 <div class="metadata">Created at : {{ movie.CreatedAt | date ('d/m/y') }}</div>
                 <h3> Synopsis : </h3>        
-                {{ movie.synopsis | raw }}                                  
+                <p> {{ movie.synopsis | raw }} </p>                                  
             </div>
         </article>
     </section>
@@ -40,10 +40,10 @@
         <div class="comment_option">
                 <div class="row">
                         <div class="col-3">
-                            {{ comment.author }} <small> {{ comment.createdAt | date ('d/m/y at H:i')}} </small>
+                           <p> {{ comment.author }} : <p> <small> {{ comment.createdAt | date ('d/m/y at H:i')}} </small>
                         </div>
                         <div class="col">
-                            {{ comment.content | raw }}
+                            <p> {{ comment.content | raw }} </p>
                         </div>
                 </div>
         </div>

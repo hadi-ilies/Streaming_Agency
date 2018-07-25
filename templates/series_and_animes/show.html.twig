@@ -12,10 +12,13 @@
                 <h3> Synopsis : </h3>        
                 {{ animes_series.synopsis | raw }}                                  
             </div>
-        </article>
+        </article>                
     </section> 
-    <section id="saison">
-        <h2>{{ animes_series.Saisons.nb_saison }}</h2> 
-    </section>       
+    <section id="saisons">
+    {% set i = 1 %}
+        {% for episode in animes_series.saison %}
+            <a href="{{ path('episodes_in_saison', {'id': episode.id})}}" class="btn btn-primary">Saison {{i}}</a>
+            {% set i = i + 1 %}
+        {% endfor %}    
+    </section>  
    {% endblock %}
-

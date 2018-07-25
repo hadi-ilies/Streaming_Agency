@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} episodes {% endblock %}
+
+{% block body %}
+   {% set j = 1 %}
+   {% for i in 0..nb_episode %}
+   <article id="episodes">   
+    <h1> episode {{j}} : </h1>
+     <iframe src={{ saison.episodes[i] }} allowfullscreen="allowfullscreen" width="800" height="500" frameborder="0"></iframe>      
+     </article>
+     {% set j = j + 1 %}
+     {% endfor %}
+     <p> {{ nb_id }} </p>
+     <article id="move_button">
+            <a href="{{ path('episodes_in_saison', {'id': saison.id - 1})}}" class="btn btn-primary">previous saison </a>     
+            <a href="{{ path('episodes_in_saison', {'id': saison.id + 1})}}" class="btn btn-primary">next saison </a>
+    </article>
+{% endblock %}

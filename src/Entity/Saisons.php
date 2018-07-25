@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,82 +17,75 @@ class Saisons
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $nb_saison;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\AnimesAndSeries", inversedBy="Saisons")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $animesAndSeries;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Episodes", mappedBy="saisons")
+     * @ORM\Column(type="array", nullable=true)
      */
     private $Episodes;
 
-    public function __construct()
-    {
-        $this->Episodes = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\AnimeAndSeries", inversedBy="saison")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $animeAndSeries;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nb_episode;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $nb_saison;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getNbSaison(): ?string
-    {
-        return $this->nb_saison;
-    }
-
-    public function setNbSaison(?string $nb_saison): self
-    {
-        $this->nb_saison = $nb_saison;
-
-        return $this;
-    }
-
-    public function getAnimesAndSeries(): ?AnimesAndSeries
-    {
-        return $this->animesAndSeries;
-    }
-
-    public function setAnimesAndSeries(?AnimesAndSeries $animesAndSeries): self
-    {
-        $this->animesAndSeries = $getEpisodesanimesAndSeries;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Episodes[]
-     */
-    public function getEpisodes(): Collection
+    public function getEpisodes(): ?array
     {
         return $this->Episodes;
     }
 
-    public function addEpisode(Episodes $episode): self
+    public function setEpisodes(?array $Episodes): self
     {
-        if (!$this->Episodes->contains($episode)) {
-            $this->Episodes[] = $episode;
-            $episode->setSaisons($this);
-        }
+        $this->Episodes = $Episodes;
 
         return $this;
     }
 
-    public function removeEpisode(Episodes $episode): self
+    public function getAnimeAndSeries(): ?AnimeAndSeries
     {
-        if ($this->Episodes->contains($episode)) {
-            $this->Episodes->removeElement($episode);
-            // set the owning side to null (unless already changed)
-            if ($episode->getSaisons() === $this) {
-                $episode->setSaisons(null);
-            }
-        }
+        return $this->animeAndSeries;
+    }
+
+    public function setAnimeAndSeries(?AnimeAndSeries $animeAndSeries): self
+    {
+        $this->animeAndSeries = $animeAndSeries;
+
+        return $this;
+    }
+
+    public function getNbEpisode(): ?int
+    {
+        return $this->nb_episode;
+    }
+
+    public function setNbEpisode(?int $nb_episode): self
+    {
+        $this->nb_episode = $nb_episode;
+
+        return $this;
+    }
+
+    public function getNbSaison(): ?int
+    {
+        return $this->nb_saison;
+    }
+
+    public function setNbSaison(?int $nb_saison): self
+    {
+        $this->nb_saison = $nb_saison;
 
         return $this;
     }

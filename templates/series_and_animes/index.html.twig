@@ -10,8 +10,8 @@
             <div class="content">
                 <img src={{ anime_serie.Image }} width="250" height="350">
                 <div class="metadata">Date : {{anime_serie.CreatedAt | date ('d/m/y')}}</div>
-                <h3>Synopsis : </h3>        
-                 {{anime_serie.synopsis | raw}}
+                <h3> Synopsis : </h3>        
+                 <p> {{anime_serie.synopsis | raw}} </p>
                  <a href="{{ path('anime_serie', {'id': anime_serie.id}) }}" class="btn btn-primary">watch now !</a>
             </div>
             <hr></hr>

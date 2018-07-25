@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AnimesAndSeriesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AnimeAndSeriesRepository")
  */
-class AnimesAndSeries
+class AnimeAndSeries
 {
     /**
      * @ORM\Id()
@@ -24,12 +24,12 @@ class AnimesAndSeries
     private $Title;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
     private $Image;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime")
      */
     private $CreatedAt;
 
@@ -39,13 +39,13 @@ class AnimesAndSeries
     private $Synopsis;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Saisons", mappedBy="animesAndSeries", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Saisons", mappedBy="animeAndSeries")
      */
-    private $Saisons;
+    private $saison;
 
     public function __construct()
     {
-        $this->Saisons = new ArrayCollection();
+        $this->saison = new ArrayCollection();
     }
 
     public function getId()
@@ -70,7 +70,7 @@ class AnimesAndSeries
         return $this->Image;
     }
 
-    public function setImage(?string $Image): self
+    public function setImage(string $Image): self
     {
         $this->Image = $Image;
 
@@ -82,7 +82,7 @@ class AnimesAndSeries
         return $this->CreatedAt;
     }
 
-    public function setCreatedAt(?\DateTimeInterface $CreatedAt): self
+    public function setCreatedAt(\DateTimeInterface $CreatedAt): self
     {
         $this->CreatedAt = $CreatedAt;
 
@@ -104,16 +104,16 @@ class AnimesAndSeries
     /**
      * @return Collection|Saisons[]
      */
-    public function getSaisons(): Collection
+    public function getSaison(): Collection
     {
-        return $this->Saisons;
+        return $this->saison;
     }
 
     public function addSaison(Saisons $saison): self
     {
-        if (!$this->Saisons->contains($saison)) {
-            $this->Saisons[] = $saison;
-            $saison->setAnimesAndSeries($this);
+        if (!$this->saison->contains($saison)) {
+            $this->saison[] = $saison;
+            $saison->setAnimeAndSeries($this);
         }
 
         return $this;
@@ -121,11 +121,11 @@ class AnimesAndSeries
 
     public function removeSaison(Saisons $saison): self
     {
-        if ($this->Saisons->contains($saison)) {
-            $this->Saisons->removeElement($saison);
+        if ($this->saison->contains($saison)) {
+            $this->saison->removeElement($saison);
             // set the owning side to null (unless already changed)
-            if ($saison->getAnimesAndSeries() === $this) {
-                $saison->setAnimesAndSeries(null);
+            if ($saison->getAnimeAndSeries() === $this) {
+                $saison->setAnimeAndSeries(null);
             }
         }
 
