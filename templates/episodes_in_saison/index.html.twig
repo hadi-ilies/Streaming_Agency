@@ -11,9 +11,38 @@
      </article>
      {% set j = j + 1 %}
      {% endfor %}
-     <p> {{ nb_id }} </p>
      <article id="move_button">
             <a href="{{ path('episodes_in_saison', {'id': saison.id - 1})}}" class="btn btn-primary">previous saison </a>     
             <a href="{{ path('episodes_in_saison', {'id': saison.id + 1})}}" class="btn btn-primary">next saison </a>
     </article>
+     <section>    
+        {% if not app.user %}
+            <section id="please_connect">
+                <h2 class="no_comment">You must be connected if you want to write a comment!</h2>
+                <a href="{{ path('login') }}" class="btn btn-primary">Connect !</a>
+            </section>    
+        {% else %}
+            {{ form_start(commentForm) }}
+            {{ form_row(commentForm.author, {'attr': {'placeholder': "your name"}})}}
+            {{ form_row(commentForm.content, {'attr': {'placeholder': "write a comment"}})}}
+            {{ form_row(commentForm.episode, {'attr': {'placeholder': "which episode"}})}}            
+            <button type="submit" class="btn btn-success">Push</button>      
+            {{ form_end(commentForm) }}
+            <hr></hr>
+        {% endif %}    
+    </section>
+    <section id="comment">
+    <h1> {{ saison.commentEpisodes | length }} Comments : </h1>    
+    {% for comment in saison.commentEpisodes %}
+        <div class="comment_option">
+                <div class="row">
+                        <div class="col-3">
+                           <p> {{ comment.author }} : <p> <small> {{ comment.createdAt | date ('d/m/y at H:i')}} </small>
+                        </div>
+                        <div class="col">
+                            <p> {{ comment.content | raw }} </p>
+                        </div>
+                </div>
+        </div>
+    {% endfor %}          
 {% endblock %}

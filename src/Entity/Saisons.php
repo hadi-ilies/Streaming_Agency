@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Saisons
      * @ORM\Column(type="integer", nullable=true)
      */
     private $nb_saison;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentEpisodes", mappedBy="saison", orphanRemoval=true)
+     */
+    private $commentEpisodes;
+
+    public function __construct()
+    {
+        $this->commentEpisodes = new ArrayCollection();
+    }
 
     public function getId()
     {
@@ -86,6 +98,37 @@ class Saisons
     public function setNbSaison(?int $nb_saison): self
     {
         $this->nb_saison = $nb_saison;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CommentEpisodes[]
+     */
+    public function getCommentEpisodes(): Collection
+    {
+        return $this->commentEpisodes;
+    }
+
+    public function addCommentEpisode(CommentEpisodes $commentEpisode): self
+    {
+        if (!$this->commentEpisodes->contains($commentEpisode)) {
+            $this->commentEpisodes[] = $commentEpisode;
+            $commentEpisode->setSaison($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentEpisode(CommentEpisodes $commentEpisode): self
+    {
+        if ($this->commentEpisodes->contains($commentEpisode)) {
+            $this->commentEpisodes->removeElement($commentEpisode);
+            // set the owning side to null (unless already changed)
+            if ($commentEpisode->getSaison() === $this) {
+                $commentEpisode->setSaison(null);
+            }
+        }
 
         return $this;
     }

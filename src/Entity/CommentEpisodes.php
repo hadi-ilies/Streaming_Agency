@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\CommentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CommentEpisodesRepository")
  */
-class Comment
+class CommentEpisodes
 {
     /**
      * @ORM\Id()
@@ -22,26 +22,31 @@ class Comment
     private $author;
 
     /**
-     * @ORM\Column(type="text")
-     */
-    private $content;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $CreatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Movies", inversedBy="comments")
+     * @ORM\Column(type="text")
+     */
+    private $content;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $episode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Saisons", inversedBy="commentEpisodes")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $movie;
+    private $saison;
 
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function getAuthor(): ?string
     {
         return $this->author;
@@ -50,18 +55,6 @@ class Comment
     public function setAuthor(string $author): self
     {
         $this->author = $author;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
 
         return $this;
     }
@@ -78,14 +71,38 @@ class Comment
         return $this;
     }
 
-    public function getMovie(): ?Movies
+    public function getContent(): ?string
     {
-        return $this->movie;
+        return $this->content;
     }
 
-    public function setMovie(?Movies $movie): self
+    public function setContent(string $content): self
     {
-        $this->movie = $movie;
+        $this->content = $content;
+
+        return $this;
+    }
+
+    public function getEpisode(): ?string
+    {
+        return $this->episode;
+    }
+
+    public function setEpisode(string $episode): self
+    {
+        $this->episode = $episode;
+
+        return $this;
+    }
+
+    public function getSaison(): ?Saisons
+    {
+        return $this->saison;
+    }
+
+    public function setSaison(?Saisons $saison): self
+    {
+        $this->saison = $saison;
 
         return $this;
     }
