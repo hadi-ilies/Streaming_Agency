@@ -1,10 +1,58 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Hello {{ controller_name }}!{% endblock %}
-    {% block body %}
+{% block body %}
       <section id="main-image">
         <div class="wrapper">
-          <h2><strong>Watch</strong><br>american series and japan animes</h2>          
+          <h1><strong>Watch</strong><br>american series and japan animes</h1>          
         </div>
     </section>
+    <section id="slide">
+    <div class="w3-content w3-section" style="max-width:200px max-height: 500px"> 
+     <img class="mySlides w3-animate-fading" src="http://golem13.fr/wp-content/uploads/2017/09/%C3%A7a-dessin-anime.jpg" style="width:100%">
+     <img class="mySlides w3-animate-fading" src="http://www.hotelroomsearch.net/im/hotels/gr/serie-21.jpg" style="width:100%">
+     <img class="mySlides w3-animate-fading" src="http://fr.web.img3.acsta.net/rx_640_256/b_1_d6d6d6/newsv7/15/10/12/10/41/136781.jpg" style="width:100%">
+     <img class="mySlides w3-animate-fading" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRf_hZleGdNTn1Xrsg27zYUbNetybL5YIk6A9peM3SkEXAARH-Gw" style="width:100%">
+    </div>
+    </section>
+    <section id="test">
+      <div class="w3-content w3-display-container" style="max-width:200px max-height: 500px">
+        <img class="manSlides" src="http://images6.fanpop.com/image/photos/39400000/Most-commonly-known-Anime-characters-animeworld-39423882-1280-720.jpg" style="width:100%">
+        <img class="manSlides" src="https://static1.millenium.org/articles/1/26/37/11/@/163711-une-anime-automne-2017-article_m-1.jpeg" style="width:100%">
+        <img class="manSlides" src="http://www.ageofinnovation.org/gallery/the-evolution-of-graphics-in-anime-movies-pict/The-evolution-of-graphics-in-anime-movies.png" style="width:100%">
+      <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottommiddle" style="width:100%">
+      <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)">&#10094;</div>
+      <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)">&#10095;</div>
+      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(1)"></span>
+      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(2)"></span>
+      <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(3)"></span>
+  </div>
+</div>
+</section>
+    <script>
+		var slideIndex = 1;
+		showDivs(slideIndex);
+
+		function plusDivs(n) {
+  		showDivs(slideIndex += n);
+		}
+		function currentDiv(n) {
+  		showDivs(slideIndex = n);
+		}
+		function showDivs(n) {
+  		var i;
+  		var x = document.getElementsByClassName("manSlides");
+  		var dots = document.getElementsByClassName("demo");
+  		if (n > x.length) {slideIndex = 1}    
+  		if (n < 1) {slideIndex = x.length}
+  		for (i = 0; i < x.length; i++) {
+     	x[i].style.display = "none";  
+  		}	
+  		for (i = 0; i < dots.length; i++) {
+    	dots[i].className = dots[i].className.replace(" w3-white", "");
+  		}
+  		x[slideIndex-1].style.display = "block";  
+  		dots[slideIndex-1].className += " w3-white";
+		}
+	</script>
 {% endblock %}

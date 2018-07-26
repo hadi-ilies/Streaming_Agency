@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}
+        {% block stylesheets %}        
         <link rel="stylesheet" href="{{ asset('build/css/app.css')}}">
         <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/icone.ico')}}"/>
         {% endblock %}
@@ -44,7 +44,9 @@
         </nav>
         <div class="container">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        <script src="{{ asset('build/js/app.js') }}"</script>
+        {% endblock %}
         </div>
     </body>
 </html>
