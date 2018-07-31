@@ -5,7 +5,7 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}        
         <link rel="stylesheet" href="{{ asset('build/css/app.css')}}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/icone.ico')}}"/>
+        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/icon.ico')}}"/>
         {% endblock %}
          <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.css">
     </head>
@@ -36,8 +36,8 @@
                         </li>
                     {% endif %}    
                 </ul>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" placeholder="Search" type="text">
+                <form class="form-inline my-2 my-lg-0" method="post" action=" {{ path('search_bar') }}">
+                    <input class="form-control mr-sm-2" placeholder="Search" type="text" name="keyword">
                     <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </div>

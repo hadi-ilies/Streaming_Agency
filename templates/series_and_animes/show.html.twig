@@ -9,8 +9,8 @@
             <div class="content">
                 <img src={{ animes_series.Image }} width="250" height="350">
                 <div class="metadata">Created at : {{animes_series.CreatedAt | date ('d/m/y')}}</div>
-                <h3> Synopsis : </h3>        
-                {{ animes_series.synopsis | raw }}                                  
+                <h3> Synopsis : </h3> 
+                <p> {{ animes_series.synopsis | raw }} </p>                                 
             </div>
         </article>                
     </section> 

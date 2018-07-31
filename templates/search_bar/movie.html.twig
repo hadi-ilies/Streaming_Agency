@@ -1,25 +1,21 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} List movies {% endblock %}
+{% block title %} search movies {% endblock %}
 
 {% block body %}
-    <section>
-        {% for movie in movies %}
+    <section class="movies">
+    {% for movie in movies %}
         <article id="article">
             <h2> {{ movie.Title }} : </h2>
             <div class="content">
                 <img src={{ movie.Image }} width="250" height="350">
                 <div class="metadata">Created At : {{movie.CreatedAt | date ('d/m/y')}}</div>
                 <h3>Synopsis : </h3>        
-                <p> {{movie.synopsis | raw}} </p>
-                <a href="{{ path('movie', {'id': movie.id}) }}" class="btn btn-primary">watch now !</a>
+                 <p> {{movie.synopsis | raw}} </p>
+                 <a href="{{ path('movie', {'id': movie.id}) }}" class="btn btn-primary">watch now !</a>
             </div>
             <hr></hr>
         </article>
         {% endfor %}
-         <div class="navigation">
-        {% do movies.setTemplate('twitter_bootstrap_v4_pagination.html.twig') %}
-           {{ knp_pagination_render(movies) }}
-        </div>
     </section>
 {% endblock %}

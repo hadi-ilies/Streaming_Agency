@@ -17,20 +17,25 @@ class MoviesController extends Controller
      * @Route("/movies", name="movies")
      */
 
-    public function list_movies()
+    public function list_movies(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository(Movies::class);
         $movies = $repo->findAll();
 
+        $paginator  = $this->get('knp_paginator')->paginate(
+            $movies, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
         return $this->render('movies/list_movies.html.twig', [
-            'movies' => $movies,
+            'movies' => $paginator,
         ]);
     }
 
     /**
      * @Route("/movies/movie/{id}", name="movie")
      */
-
+    
     public function movies($id, Request $request, ObjectManager $manager)
     {
         $repo = $this->getDoctrine()->getRepository(Movies::class);

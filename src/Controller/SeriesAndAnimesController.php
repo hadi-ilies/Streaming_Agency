@@ -2,12 +2,13 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Form\CommentType;
-use App\Entity\AnimeAndSeries;
 use App\Entity\Saisons;
 use App\Entity\Episodes;
+use App\Form\CommentType;
+use App\Entity\AnimeAndSeries;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SeriesAndAnimesController extends Controller
 {
@@ -15,13 +16,18 @@ class SeriesAndAnimesController extends Controller
      * @Route("/series/and/animes", name="series_and_animes")
      */
 
-    public function index()
+    public function index(Request $request)
     {
         $repo = $this->getDoctrine()->getRepository(AnimeAndSeries::class);
         $anime_series = $repo->findAll();
-
+        
+        $paginator  = $this->get('knp_paginator')->paginate(
+            $anime_series, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
         return $this->render('series_and_animes/index.html.twig', [
-            'animes_series' => $anime_series,
+            'animes_series' => $paginator,
         ]);
     }
 

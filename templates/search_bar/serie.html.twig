@@ -1,9 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %} Streaming Agency {% endblock %}
+
 {% block body %}
 <section>
-        {% for anime_serie in animes_series %}
+    {% for anime_serie in animes_series %}
         <article id="article">
             <h2> {{ anime_serie.Title }} : </h2>
             <div class="content">
@@ -16,9 +17,5 @@
             <hr></hr>
         </article>
         {% endfor %}
-        <div class="navigation">
-        {% do animes_series.setTemplate('twitter_bootstrap_v4_pagination.html.twig') %}
-           {{ knp_pagination_render(animes_series) }}
-        </div>
-    </section>    
+    </section>
 {% endblock %}
