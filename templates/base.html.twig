@@ -4,10 +4,11 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}        
-        <link rel="stylesheet" href="{{ asset('build/css/app.css')}}">
-        <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/icon.ico')}}"/>
+            <link rel="stylesheet" href="{{ asset('build/css/app.css')}}">
+            <link rel="stylesheet" href="{{ asset('build/css/style/all.css')}}">
+            <link rel="shortcut icon" type="image/x-icon" href="{{ asset('build/icon.ico')}}"/>
         {% endblock %}
-         <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.css">
+            <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.css">
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -18,21 +19,21 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('series_and_animes') }}">Series/Animes<span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="{{ path('series_and_animes') }}"> <i class="fas fa-video"></i> Series/Animes<span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('movies') }}">Movies</a>
+                        <a class="nav-link" href="{{ path('movies') }}"> <i class="fas fa-film"></i> Movies </a>
                     </li>
                     {% if not app.user %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('login') }}">Login</a>
+                            <a class="nav-link" href="{{ path('login') }}"> <i class="fas fa-sign-in-alt"></i> Sign in</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ path('registration') }}">Sign Up</a>
+                            <a class="nav-link" href="{{ path('registration') }}"> <i class="fas fa-user-plus"></i> Sign up </a>
                         </li>
                     {% else %}
                          <li class="nav-item">
-                            <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                            <a class="nav-link" href="{{ path('logout') }}"> <i class="fas fa-sign-out-alt"></i> Logout </a>
                         </li>
                     {% endif %}    
                 </ul>
