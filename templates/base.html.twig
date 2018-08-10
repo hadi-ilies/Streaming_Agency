@@ -45,9 +45,16 @@
         </nav>
         <div class="container">
         {% block body %}{% endblock %}
+        </div>
+        <footer>
+            <div class="wrapper">
+                <h1>Streaming Agency.<h1>
+                <div class="copyright">Copyright 2018. all right are reserved.</div>
+            </div>
+        </footer>
         {% block javascripts %}
         <script src="{{ asset('build/js/app.js') }}"</script>
         {% endblock %}
-        </div>
-    </body>
+        
+        </body>
 </html>

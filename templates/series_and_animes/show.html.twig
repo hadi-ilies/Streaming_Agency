@@ -17,7 +17,7 @@
     <section id="saisons">
     {% set i = 1 %}
         {% for episode in animes_series.saison %}
-            <a href="{{ path('episodes_in_saison', {'id': episode.id})}}" class="btn btn-primary">Saison {{i}}</a>
+            <a href="{{ path('episodes_in_saison', {'id': episode.id, 'episode' : 0})}}" class="btn btn-primary">Saison {{i}}</a>
             {% set i = i + 1 %}
         {% endfor %}    
     </section>  

@@ -14,9 +14,9 @@ use Doctrine\Common\Persistence\ObjectManager;
 class EpisodesInSaisonController extends Controller
 {
     /**
-     * @Route("/episodes/in/saison/{id}", name="episodes_in_saison")
+     * @Route("/episodes/in/saison/{id}/{episode}", name="episodes_in_saison")
      */
-    public function list_episode($id, ObjectManager $manager, Request $request)
+    public function list_episode($episode, $id, ObjectManager $manager, Request $request)
     {
         $repo = $this->getDoctrine()->getRepository(Saisons::class);
         $saison = $repo->find($id);
@@ -32,17 +32,18 @@ class EpisodesInSaisonController extends Controller
             $manager->flush();
             
             return ($this->redirectToRoute('episodes_in_saison', [
-                'id' => $id
+                'id' => $id,
+                'episode' => $episode,
             ]));
         }
-        
-        //$paginator = $this->get('knp_paginator')->paginate(
-          //  $saison, /* query NOT result */
-            //$request->query->getInt('page', 1)/*page number*/,
-            //1/*limit per page*/
-     //   );
+
+        $prev_saison = $repo->find($id - 1);      
+        $next_saison = $repo->find($id + 1);
         return $this->render('episodes_in_saison/index.html.twig', [
             'saison' => $saison,
+            'next_saison' => $next_saison,
+            'prev_saison' => $prev_saison,
+            'episode' => $episode,
             'nb_episode' => $nb_episode,
             'commentForm' => $form->createView(),
         ]);                

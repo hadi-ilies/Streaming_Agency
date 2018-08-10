@@ -3,17 +3,21 @@
 {% block title %} episodes {% endblock %}
 
 {% block body %}
-   {% set j = 1 %}
-   {% for i in 0..nb_episode %}
    <article id="episodes">   
-    <h1> episode {{j}} : </h1>
-     <iframe src={{ saison.episodes[i] }} allowfullscreen="allowfullscreen" width="800" height="500" frameborder="0"></iframe>      
-     </article>
-     {% set j = j + 1 %}
-     {% endfor %}
-     <article id="move_button">
-            <a href="{{ path('episodes_in_saison', {'id': saison.id - 1})}}" class="btn btn-primary">previous saison </a>     
-            <a href="{{ path('episodes_in_saison', {'id': saison.id + 1})}}" class="btn btn-primary">next saison </a>
+        <h1> episode {{episode + 1}} : </h1>
+        <iframe src={{ saison.episodes[episode] }} allowfullscreen="allowfullscreen" width="800" height="500" frameborder="0"></iframe>      
+    </article>
+    <article id="move_button">
+        {% if episode != 0 %}
+            <a href="{{ path('episodes_in_saison', {'id': saison.id, 'episode' : episode - 1})}}" class="btn btn-primary">previous episode </a>
+        {% elseif episode == 0 and prev_saison != NULL and prev_saison.animeAndSeries.id == saison.animeAndSeries.id %}
+             <a href="{{ path('episodes_in_saison', {'id': saison.id - 1, 'episode' : 0})}}" class="btn btn-primary">previous saison </a>
+        {% endif %} 
+        {% if episode != nb_episode %}
+            <a href="{{ path('episodes_in_saison', {'id': saison.id, 'episode' : episode + 1})}}" class="btn btn-primary">next episode </a>
+        {% elseif episode == nb_episode and next_saison != NULL and next_saison.animeAndSeries.id == saison.animeAndSeries.id %}
+            <a href="{{ path('episodes_in_saison', {'id': saison.id + 1, 'episode' : 0})}}" class="btn btn-primary">next saison </a>
+        {% endif %}  
     </article>
      <section>    
         {% if not app.user %}
